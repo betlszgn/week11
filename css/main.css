@@ -80,4 +80,88 @@ article div{
     font-weight: bold;
     background-color: azure;
     border: 2px solid darkblue;
+
+    /* you can add flexbox inside of a grid (or grid inside of flexbox) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*******************************************************  
+                   GRID STYLES
+********************************************************/
+
+section.one article{
+    /* like display flex, you need to have a grid container with display:grid */
+    display: grid;
+
+    /* tell the grid how many colomns it should have  
+    fr stands for fraction, and it means touse a part of the available space*/
+    grid-template-columns: 1fr 1fr 1fr;
+
+    /* you can also control rows - but in this example, the third row won't have a defined height */
+    grid-template-rows: 120px 120px ;
+}
+
+section.two article{
+    display: grid;
+
+    /* with grid, you have an explicit grid (what you define) and an implicit grid (what the browser automatically fills out) */
+
+    grid-template-columns: repeat(4, 1fr);
+
+    /* for rows, you can tell each row to automatticly take on a prperty, no matter how many */
+    grid-auto-rows: 120px;
+
+    /* tell the grid to automatically fill space left by element that were too big */
+    grid-auto-flow: dense;
+}
+
+section.two div:nth-child(1){
+    /* you can tell a cell to start and at a row or colomn */
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+section.two div:nth-child(2){
+    grid-column-start: 2;
+    grid-column-end: 5;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+section.two div:nth-child(6){
+    grid-column-start: 1;
+
+    /* you can use span to tell it to strech across a spesific number of column */
+    grid-column-end: span 4;
+}
+
+section.three article{
+    display: grid;
+
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-auto-rows: 120px;
+    grid-auto-flow: dense;
+
+    /* you can put space between rows and columns with gap */
+    gap: 1em 1em;
+}
+
+section.three div:nth-child(2){
+    /* another way to mave grid cells is with order by default everthing has an order of 0 - anyting with a higher order comes later, anything with a lower order comes earlier */
+    order: 1;
+}
+
+section.three div:nth-chid(5){
+    grid-area: 2 / 1 / span 2 / span 2;
+    /* this is equivalent to writing:
+    grid column-start: 2;
+    grid-column-end: span 2;
+    grid-row-start: 1;
+    grid-row-end: span 2; */
 }
